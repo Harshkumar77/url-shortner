@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "node .",
-    "dev": "nodemon ."
+    "dev": "clear;nodemon ."
   },
   "type": "module",
   "keywords": [],
