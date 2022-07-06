@@ -10,9 +10,9 @@ export const configureApp = (app: Express) => {
     app.use(cookieParser())
     app.use(passport.initialize());
 
-    const { DATABASE_URL, PORT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_KEY } = process.env
+    const { DATABASE_URL, PORT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_KEY, NODE_ENV } = process.env
 
-    if (!DATABASE_URL || !PORT || !GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !JWT_KEY)
+    if (!DATABASE_URL || !PORT || !GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !JWT_KEY || !NODE_ENV)
         throw Error("Check enviornment variables")
 
     app.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`))

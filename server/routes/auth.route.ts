@@ -24,7 +24,7 @@ authRouter.get("/auth/callback",
         const refreshToken = jwt.sign({
             id: req.user.id,
         }, process.env.JWT_KEY as string, {
-            expiresIn: '10min'
+            expiresIn: '10day'
         })
 
         refreshTokens.push(refreshToken)
@@ -33,7 +33,9 @@ authRouter.get("/auth/callback",
             secure: true,
             httpOnly: true,
         })
-        res.send("hello")
+        if (process.env.NODE_ENV as string == 'dev')
+            res.redirect("http://localhost:3000")
+        else res.redirect("/")
     }
 );
 
