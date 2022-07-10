@@ -1,10 +1,14 @@
 import { useQuery } from "react-query"
 import request from "./axios"
 
-const urlHistory = () => request.get("/api/urls/recent").then((_) => _.data)
+const recentUrls = () => request.get("/api/urls/recent").then((_) => _.data)
 
-export const useUrlHistory = () =>
-  useQuery("urls", urlHistory, {
+const historyUrls = () => request.get("/api/urls").then((_) => _.data)
+
+export const useRecent = () =>
+  useQuery("recent", recentUrls, {
     enabled: false,
     refetchOnMount: true,
   })
+
+export const useHistory = () => useQuery("historyUrls", historyUrls)

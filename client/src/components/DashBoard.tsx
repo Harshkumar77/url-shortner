@@ -1,19 +1,21 @@
 import axios from "axios"
-import { ReactNode, useEffect, useState } from "react"
+import { ReactNode, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { GlobalContext } from "../App"
 import request from "../utils/axios"
-import { useUrlHistory } from "../utils/qurey"
+import { useRecent } from "../utils/qurey"
 import History from "./History"
 
-const base_url = process.env.NODE_ENV === 'development' ? "http://localhost:8080" : new URL(window.location.href).origin
 
 export default function () {
 
   const [url, setUrl] = useState("")
-  const [notification, setNotification] = useState("")
+  const { setNotification } = useContext(GlobalContext)
   const [generatingUrl, setGeneratingUrl] = useState(false)
 
-  const { data, isLoading, isError, refetch } = useUrlHistory()
+  const { data, isLoading, isError, refetch } = useRecent()
+
+  const { BASE_URL } = useContext(GlobalContext)
 
   useEffect(() => {
     refetch()
@@ -45,7 +47,7 @@ export default function () {
             request.post("/api/generate", {
               url
             }).then(_ => {
-              navigator.clipboard.writeText(`${base_url}/${_.data.short}`)
+              navigator.clipboard.writeText(`${BASE_URL}/${_.data.short}`)
               setNotification("Copied to clipboard")
               setGeneratingUrl(false)
               setTimeout(() => {
@@ -60,30 +62,17 @@ export default function () {
           disabled={generatingUrl}
         >Short it</button>
       </div>
-      <History setNotification={setNotification} urls={data || []} isLoading={isLoading} />
+      <History urls={data || []} isLoading={isLoading} />
       {!isLoading && <More />}
-      <Notification>{notification}</Notification>
     </>
   )
 }
 
-interface NotificationProps {
-  children?: string
-}
-
-function Notification({ children }: NotificationProps) {
-  return <>
-    {
-      children && <h1 className="bg-filler outline outline-1 p-2 inline rounded fixed top-0 right-0 m-8 outline-primary w-[18ch]">{children}</h1>
-    }
-  </>
-
-}
 
 function More() {
   return <Link to={'/stats'}>
     <div
-      className="bg-primary p-3 text-center font-bold max-w-[10ch] mx-auto mb-2 rounded-xl hover:bg-filler cursor-pointer">
+      className="bg-primary p-3 text-center font-bold max-w-[10ch] mx-auto mb-2 rounded-xl hover:bg-secondary hover:outline hover:outline-4 hover:outline-primary cursor-pointer">
       Full stats</div>
   </Link >
 }

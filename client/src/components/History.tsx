@@ -1,33 +1,39 @@
-export default function History({ isLoading, urls, setNotification }: HistoryProps) {
+import { useContext } from "react"
+import { GlobalContext } from "../App"
+
+export default function History({ isLoading, urls }: HistoryProps) {
     if (isLoading)
         return <> Loading</>
     return <>
-        {urls.map((_: any) => <HistoryItem setNotification={setNotification} key={_.id} short={_.short} favicon={_.favicon} url={_.url} clicks={_.clicks} />)}
+        {urls.map((_: any) => <HistoryItem key={_.id} short={_.short} favicon={_.favicon} url={_.url} clicks={_.clicks} />)}
     </>
 }
 
-const base_url = process.env.NODE_ENV === 'development' ? "http://localhost:8080" : new URL(window.location.href).origin
-
-function HistoryItem({ url, favicon, short, clicks, setNotification }: HistoryItemProps) {
+function HistoryItem({ url, favicon, short, clicks }: HistoryItemProps) {
+    const { BASE_URL } = useContext(GlobalContext)
+    const shortURL = `${BASE_URL}/${short}`
     return <div className="md:m-5 m-6 md:p-5 p-3 rounded-xl max-w-[800px] md:mx-auto bg-secondary ">
         <div className="flex items-center">
             <img src={favicon} alt="favicon" className="w-6 h-6 mr-2" />
             <h1 className=" underline overflow-x-hidden whitespace-nowrap text-ellipsis">{url}</h1>
         </div>
         <div className="flex py-1">
-            <ClipboardIcon setNotification={setNotification} />
-            <a className="text-primary font-bold ml-3" href={`${base_url}/${short}`}>{`${base_url}/${short}`}</a>
+            <ClipboardIcon shortURL={shortURL} />
+            <a className="text-primary font-bold ml-3" href={shortURL}>{shortURL}</a>
         </div>
         <p><span className=" font-bold">Clicks{" : "}</span>{clicks}</p>
     </div>
 
 }
 
-function ClipboardIcon({ setNotification }: ClipboardIconProps) {
+function ClipboardIcon({ shortURL }: ClipboardIconProps) {
+
+    const { setNotification } = useContext(GlobalContext)
 
     return <svg xmlns="http://www.w3.org/2000/svg"
         className="hover:text-primary cursor-pointer text-white h-5 w-5"
         onClick={() => {
+            navigator.clipboard.writeText(shortURL)
             setNotification("Copied to clipboard")
             setTimeout(() => {
                 setNotification("")
@@ -42,7 +48,6 @@ function ClipboardIcon({ setNotification }: ClipboardIconProps) {
 interface HistoryProps {
     isLoading: boolean
     urls: []
-    setNotification: React.Dispatch<React.SetStateAction<string>>
 }
 
 interface HistoryItemProps {
@@ -50,9 +55,8 @@ interface HistoryItemProps {
     short: string
     favicon: string
     clicks: string
-    setNotification: React.Dispatch<React.SetStateAction<string>>
 }
 
 interface ClipboardIconProps {
-    setNotification: React.Dispatch<React.SetStateAction<string>>
+    shortURL: string
 }
