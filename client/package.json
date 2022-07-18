@@ -4,16 +4,18 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && rm -rf ../server/dist && mv dist ../server",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "prop-types": "^15.6.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-loader-spinner": "^5.1.5",
     "react-query": "^3.39.1",
     "react-router-dom": "6",
+    "recharts": "^2.1.12",
     "vanta": "^0.5.22"
   },
   "devDependencies": {

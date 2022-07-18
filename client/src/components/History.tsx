@@ -1,15 +1,16 @@
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { GlobalContext } from "../App"
 
 export default function History({ isLoading, urls }: HistoryProps) {
     if (isLoading)
         return <> Loading</>
     return <>
-        {urls.map((_: any) => <HistoryItem key={_.id} short={_.short} favicon={_.favicon} url={_.url} clicks={_.clicks} />)}
+        {urls.map((_: any) => <HistoryItem id={_._id} key={_._id} short={_.short} favicon={_.favicon} url={_.url} clicks={_.clicks} />)}
     </>
 }
 
-function HistoryItem({ url, favicon, short, clicks }: HistoryItemProps) {
+export function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProps) {
     const { BASE_URL } = useContext(GlobalContext)
     const shortURL = `${BASE_URL}/${short}`
     return <div className="md:m-5 m-6 md:p-5 p-3 rounded-xl max-w-[800px] md:mx-auto bg-secondary ">
@@ -21,7 +22,14 @@ function HistoryItem({ url, favicon, short, clicks }: HistoryItemProps) {
             <ClipboardIcon shortURL={shortURL} />
             <a className="text-primary font-bold ml-3" href={shortURL}>{shortURL}</a>
         </div>
-        <p><span className=" font-bold">Clicks{" : "}</span>{clicks}</p>
+        <div className="flex align-middle items-center">
+            <p><span className=" font-bold">Clicks{" : "}</span>{clicks}</p>
+            <Link to={`/url/${id}`}>
+
+                <p className="p-2 rounded-md font-semibold m-2 hover:bg-primary border-primary border-2">Analytics</p>
+            </Link>
+        </div>
+
     </div>
 
 }
@@ -55,6 +63,7 @@ interface HistoryItemProps {
     short: string
     favicon: string
     clicks: string
+    id: string
 }
 
 interface ClipboardIconProps {

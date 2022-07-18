@@ -4,22 +4,27 @@ import jwt, { JwtPayload } from "jsonwebtoken"
 const { JWT_KEY } = process.env
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
-    if (!req.headers['authorization']) {
-        res.status(400).json({ "message": "no authorization header provided" })
-        return
-    }
-    if (!req.headers['authorization'].startsWith("Bearer ")) {
-        res.status(400).json({ "message": "provide authorization properly" })
-        return
-    }
+  if (!req.headers["authorization"]) {
+    res.status(400).json({ message: "no authorization header provided" })
+    return
+  }
+  if (!req.headers["authorization"].startsWith("Bearer ")) {
+    res.status(400).json({ message: "provide authorization properly" })
+    return
+  }
 
-    const access_token = req.headers['authorization'].split(" ").pop() as string
+  const access_token = req.headers["authorization"].split(" ").pop() as string
 
-    try {
-        const jwtResult = jwt.verify(access_token, JWT_KEY as string) as JwtPayload
-        req.user = { id: jwtResult.id }
-        next()
-    } catch (error: any) {
-        res.status(400).send(error)
+  try {
+    const jwtResult = jwt.verify(access_token, JWT_KEY as string) as JwtPayload
+    req.user = { id: jwtResult.id }
+    next()
+  } catch (error: any) {
+    console.log(error.name)
+    if (error.name == "TokenExpiredError") {
+      res.status(403).send(error)
+      return
     }
+    res.status(400).send(error)
+  }
 }

@@ -3,7 +3,7 @@ import { ReactNode, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { GlobalContext } from "../App"
 import request from "../utils/axios"
-import { useRecent } from "../utils/qurey"
+import { useRecent } from "../utils/query"
 import History from "./History"
 
 
