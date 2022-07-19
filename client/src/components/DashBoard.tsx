@@ -1,4 +1,5 @@
 import axios from "axios"
+import exp from "constants"
 import { ReactNode, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { GlobalContext } from "../App"
@@ -7,11 +8,18 @@ import { useRecent } from "../utils/query"
 import History from "./History"
 
 
-export default function () {
+export default function DashBoard() {
 
   const [url, setUrl] = useState("")
   const { setNotification } = useContext(GlobalContext)
   const [generatingUrl, setGeneratingUrl] = useState(false)
+  const [advanceOptions, setAdvanceOptions] = useState(false)
+
+  const [expirationDate, setExpirationDate] = useState({
+    enabled: false,
+    inputFormat: (new Date()).toDateString()
+  })
+  const [limit, setLimit] = useState(0)
 
   const { data, isLoading, isError, refetch } = useRecent()
 
@@ -33,7 +41,8 @@ export default function () {
           value={url}
           onChange={({ currentTarget }) => setUrl(currentTarget.value)}
         />
-        <button className=" disabled:bg-gray-400 disabled:outline-none hover:bg-primary hover:outline-none outline outline-primary p-3 rounded-lg m-4 font-semibold font-2xl"
+
+        <button className="disabled:bg-gray-400 disabled:outline-none hover:bg-primary hover:outline-none outline outline-primary p-3 rounded-lg m-4 font-semibold font-2xl"
           onClick={() => {
             if (url === "") {
               setNotification("No empty url")
@@ -44,9 +53,8 @@ export default function () {
             }
             setNotification("Generating...")
             setGeneratingUrl(true)
-            request.post("/api/generate", {
-              url
-            }).then(_ => {
+            const body = advanceOptions ? { url, expiringAt: expirationDate.inputFormat, limit } : { url }
+            request.post("/api/generate", body).then(_ => {
               navigator.clipboard.writeText(`${BASE_URL}/${_.data.short}`)
               setNotification("Copied to clipboard")
               setGeneratingUrl(false)
@@ -56,18 +64,32 @@ export default function () {
               refetch()
             }).catch(e => {
               console.log(e);
-
             })
           }}
           disabled={generatingUrl}
         >Short it</button>
+        <label className="pr-2" >Advance options</label>
+        <input type="checkbox" className="" checked={advanceOptions} onChange={({ currentTarget }) => {
+          setAdvanceOptions(currentTarget.checked)
+        }} />
+        {advanceOptions && <div className="">
+          <div>
+            <label className="pr-2">Expiration Date (UTC)</label>
+            <input min={new Date().toISOString().split("T")[0]} type="date" value={expirationDate.inputFormat} onChange={({ target }) => {
+              setExpirationDate({ enabled: true, inputFormat: target.value })
+            }} className="bg-primary p-2 rounded font-bold outline-none" />
+          </div>
+          <div className="p-2">
+            <label>Limit (0 for no-limit)</label>
+            <input type="number" min={0} value={limit} onChange={({ currentTarget }) => setLimit(currentTarget.valueAsNumber)} className="outline-none text-center ml-2 bg-primary p-2 rounded font-bold" />
+          </div>
+        </div>}
       </div>
       <History urls={data || []} isLoading={isLoading} />
       {!isLoading && <More />}
     </>
   )
 }
-
 
 function More() {
   return <Link to={'/stats'}>

@@ -5,4 +5,5 @@ function sendClientCode(req: Request, res: Response) {
   res.sendFile("build/index.html")
 }
 
-clientRouter.post("/", sendClientCode)
+clientRouter.get("/", sendClientCode)
+clientRouter.get("/url/:id", sendClientCode)

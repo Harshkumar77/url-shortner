@@ -31,6 +31,10 @@ export const urlSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  limit: {
+    type: Number,
+    default: 0,
+  },
   generatedBy: {
     type: mongoose.Types.ObjectId,
     ref: User,
@@ -43,12 +47,6 @@ export const urlSchema = new mongoose.Schema({
     default: new Map<string, string>(),
     required: true,
   },
-  // timestamp: {
-  //   type: Map,
-  //   of: Number,
-  //   default: new Map<string, string>(),
-  //   required: true,
-  // },
 })
 
 urlSchema.pre("save", async function (next) {

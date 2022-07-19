@@ -20,13 +20,15 @@ redirectRouter.get("/:short", async (req, res) => {
       )
       return
     }
+
+    if (url.limit !== 0 && url.clicks >= url.limit)
+      return res.status(404).send("NOT FOUND!")
+    if (url.expiringAt && url.expiringAt < new Date())
+      return res.status(404).send("NOT FOUND!")
+
     res.redirect(url.url)
     url.clicks++
-    console.log(
-      `https://ipinfo.io/${req.ip === "::1" ? "" : req.ip}?token=${
-        process.env.IP_INFO_KEY as string
-      }`
-    )
+
     if (process.env.NODE_ENV === "prod")
       await axios
         .get(
@@ -44,7 +46,6 @@ redirectRouter.get("/:short", async (req, res) => {
       const countries = ["IN", "US", "CN", "AU", "AE"]
       const randomIdx: number = parseInt("" + Math.random() * countries.length)
       const country = countries[randomIdx]
-      console.log(country)
       if (url.countries.has(country))
         url.countries.set(country, url.countries.get(country)! + 1)
       else url.countries.set(country, 1)

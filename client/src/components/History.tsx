@@ -10,7 +10,7 @@ export default function History({ isLoading, urls }: HistoryProps) {
     </>
 }
 
-export function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProps) {
+function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProps) {
     const { BASE_URL } = useContext(GlobalContext)
     const shortURL = `${BASE_URL}/${short}`
     return <div className="md:m-5 m-6 md:p-5 p-3 rounded-xl max-w-[800px] md:mx-auto bg-secondary ">
@@ -26,7 +26,7 @@ export function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProp
             <p><span className=" font-bold">Clicks{" : "}</span>{clicks}</p>
             <Link to={`/url/${id}`}>
 
-                <p className="p-2 rounded-md font-semibold m-2 hover:bg-primary border-primary border-2">Analytics</p>
+                <p className="p-2 rounded-md font-semibold m-2 hover:bg-primary border-primary border-2">More</p>
             </Link>
         </div>
 
@@ -34,7 +34,7 @@ export function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProp
 
 }
 
-function ClipboardIcon({ shortURL }: ClipboardIconProps) {
+export function ClipboardIcon({ shortURL }: ClipboardIconProps) {
 
     const { setNotification } = useContext(GlobalContext)
 
