@@ -18,3 +18,9 @@ A url shortner with url configuration , tracking and analytics - [LIVE 🔴](htt
 ## Technical notes
 - Monolith architecture , client build with vite and a server with express
 - Why **MongoDB** ? Faster than sql database for Key - Value pair searching and the datamodels were not too complex 
+- **Generation of unique ids** for urls : Using first 6 digits of hash of Nth url generated. That way we can also assign ranges to multiple server for generation.
+
+## Future Notes
+- Checking if short id collide (Skipped because very unlikely to happen)
+- Change advance button from checkbox to slider
+- Add slide animation when advance button in toogled
