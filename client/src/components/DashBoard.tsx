@@ -63,7 +63,11 @@ export default function DashBoard() {
               }, 1500);
               refetch()
             }).catch(e => {
-              console.log(e);
+              setNotification("Please enter valid url")
+              setGeneratingUrl(false)
+              setTimeout(() => {
+                setNotification("")
+              }, 1500);
             })
           }}
           disabled={generatingUrl}

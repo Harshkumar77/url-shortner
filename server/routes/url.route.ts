@@ -10,7 +10,7 @@ export const urlRouter = express.Router()
 
 urlRouter.post("/api/generate", verifyUser, async (req, res) => {
   if (!req.body.url) {
-    res.status(400)
+    res.status(400).end()
     return
   }
   try {
@@ -25,8 +25,8 @@ urlRouter.post("/api/generate", verifyUser, async (req, res) => {
     })
     res.send(uu).status(201)
   } catch (error: any) {
-    if (error.code === "ERR_INVALID_URL") res.status(406)
-    else res.status(500)
+    if (error.code === "ERR_INVALID_URL") res.status(406).end()
+    else res.status(500).end()
   }
 })
 

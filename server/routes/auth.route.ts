@@ -24,7 +24,7 @@ authRouter.get(
   }),
   (req, res) => {
     if (!req.user) {
-      res.status(500)
+      res.status(500).end()
       return
     }
     const refreshToken = jwt.sign(
