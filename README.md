@@ -14,3 +14,7 @@ A url shortner with url configuration , tracking and analytics - [LIVE 🔴](htt
 - 💽 **Server** : Express , Passport ,  Mongoose
 - 🔢 **DataBase** : MongoDB
 - ✈️ **Deployed On** : Heroku
+
+## Technical notes
+- Monolith architecture , client build with vite and a server with express
+- Why **MongoDB** ? Faster than sql database for Key - Value pair searching and the datamodels were not too complex 
