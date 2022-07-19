@@ -2,23 +2,15 @@
 
 A url shortner with url configuration , tracking and analytics
 
-## Backend
+## Features 
+1. Short long urls.
+1. Add limit and expiring date to the url
+1. View demographics of clickers and limit usage in graphical form
+1. Beautiful Landing page and modern interface
 
-### Routes
+## Tech Stack
 
-1. POST **/api/generate**
-   - Generates url
-   - Takes expiration time , long url
-   - returns short url link
-
-### Data Models
-
-Made using prisma + mongoDB
-
-1. USER
-
-- NAME , ACCOUNT CREATED , URLS , AUTH
-
-2. URL
-
-- URL , SHORT ID , EXPIRATION TIME , TOTAL_CLICKS , CLICKS_BY_COUNTRY , CLICKS_BY_TIME
+- **Client** : React , Tailwind CSS , Typescript
+- **Server** : Express , Passport ,  Mongoose
+- **DataBase** : MongoDB
+- **Deployed On** : Heroku
