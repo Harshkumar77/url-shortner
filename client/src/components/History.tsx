@@ -6,7 +6,7 @@ import { GlobalContext } from "../App"
 
 export default function History({ isLoading, urls }: HistoryProps) {
     if (isLoading)
-        return <div>
+        return <div className="text-center w-full flex justify-center">
             <ThreeDots color="white" />
         </div>
     const [parent] = useAutoAnimate<HTMLDivElement>()
@@ -21,14 +21,14 @@ function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProps) {
     return <div className="md:m-5 m-6 md:p-5 p-3 rounded-xl max-w-[800px] md:mx-auto bg-secondary ">
         <div className="flex items-center">
             <img src={favicon} alt="favicon" className="w-6 h-6 mr-2" />
-            <h1 className=" underline overflow-x-hidden whitespace-nowrap text-ellipsis">{url}</h1>
+            <h1 className="underline overflow-x-hidden whitespace-nowrap text-ellipsis">{url}</h1>
         </div>
         <div className="flex py-1">
             <ClipboardIcon shortURL={shortURL} />
             <a className="text-primary font-bold ml-3" href={shortURL}>{shortURL}</a>
         </div>
         <div className="flex align-middle items-center">
-            <p><span className=" font-bold">Clicks{" : "}</span>{clicks}</p>
+            <p><span className="font-bold">Clicks{" : "}</span>{clicks}</p>
             <Link to={`/url/${id}`}>
 
                 <p className="p-2 rounded-md font-semibold m-2 hover:bg-primary border-primary border-2">More</p>

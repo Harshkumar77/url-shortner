@@ -72,14 +72,14 @@ function MiniCard({ url, favicon, short, clicks, id, limit, expiringAt }: MiniCa
     return <div className="md:m-5 m-6 md:p-5 p-3 rounded-xl max-w-[800px] md:mx-auto bg-secondary ">
         <div className="flex items-center">
             <img src={favicon} alt="favicon" className="w-6 h-6 mr-2" />
-            <h1 className=" underline overflow-x-hidden whitespace-nowrap text-ellipsis">{url}</h1>
+            <h1 className="underline overflow-x-hidden whitespace-nowrap text-ellipsis">{url}</h1>
         </div>
         <div className="flex py-1">
             <ClipboardIcon shortURL={shortURL} />
             <a className="text-primary font-bold ml-3" href={shortURL}>{shortURL}</a>
         </div>
         <div className="flex flex-col md:flex-row align-middle items-center">
-            <p><span className=" font-bold">Clicks{" : "}</span>{clicks}</p>
+            <p><span className="font-bold">Clicks{" : "}</span>{clicks}</p>
             {limit !== 0 &&
                 <p><span className="ml-2 font-bold">Limit{" : "}</span>{limit}</p>
             }
