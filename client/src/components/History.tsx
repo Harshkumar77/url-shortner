@@ -1,13 +1,18 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { useContext } from "react"
+import { ThreeDots } from "react-loader-spinner"
 import { Link } from "react-router-dom"
 import { GlobalContext } from "../App"
 
 export default function History({ isLoading, urls }: HistoryProps) {
     if (isLoading)
-        return <> Loading</>
-    return <>
+        return <div>
+            <ThreeDots color="white" />
+        </div>
+    const [parent] = useAutoAnimate<HTMLDivElement>()
+    return <div ref={parent}>
         {urls.map((_: any) => <HistoryItem id={_._id} key={_._id} short={_.short} favicon={_.favicon} url={_.url} clicks={_.clicks} />)}
-    </>
+    </div>
 }
 
 function HistoryItem({ url, favicon, short, clicks, id }: HistoryItemProps) {

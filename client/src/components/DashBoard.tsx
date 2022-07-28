@@ -6,6 +6,7 @@ import { GlobalContext } from "../App"
 import request from "../utils/axios"
 import { useRecent } from "../utils/query"
 import History from "./History"
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 
 export default function DashBoard() {
@@ -24,6 +25,8 @@ export default function DashBoard() {
   const { data, isLoading, isError, refetch } = useRecent()
 
   const { BASE_URL } = useContext(GlobalContext)
+
+  const [advanceOptionsRef] = useAutoAnimate<HTMLDivElement>()
 
   useEffect(() => {
     refetch()
@@ -76,18 +79,22 @@ export default function DashBoard() {
         <input type="checkbox" className="" checked={advanceOptions} onChange={({ currentTarget }) => {
           setAdvanceOptions(currentTarget.checked)
         }} />
-        {advanceOptions && <div className="">
-          <div>
-            <label className="pr-2">Expiration Date (UTC)</label>
-            <input min={new Date().toISOString().split("T")[0]} type="date" value={expirationDate.inputFormat} onChange={({ target }) => {
-              setExpirationDate({ enabled: true, inputFormat: target.value })
-            }} className="bg-primary p-2 rounded font-bold outline-none" />
-          </div>
-          <div className="p-2">
-            <label>Limit (0 for no-limit)</label>
-            <input type="number" min={0} value={limit} onChange={({ currentTarget }) => setLimit(currentTarget.valueAsNumber)} className="outline-none text-center ml-2 bg-primary p-2 rounded font-bold" />
-          </div>
-        </div>}
+        <div ref={advanceOptionsRef}>
+          {advanceOptions &&
+            <>
+              <div>
+                <label className="pr-2">Expiration Date (UTC)</label>
+                <input min={new Date().toISOString().split("T")[0]} type="date" value={expirationDate.inputFormat} onChange={({ target }) => {
+                  setExpirationDate({ enabled: true, inputFormat: target.value })
+                }} className="bg-primary p-2 rounded font-bold outline-none" />
+              </div>
+              <div className="p-2">
+                <label>Limit (0 for no-limit)</label>
+                <input type="number" min={0} value={limit} onChange={({ currentTarget }) => setLimit(currentTarget.valueAsNumber)} className="outline-none text-center ml-2 bg-primary p-2 rounded font-bold" />
+              </div>
+            </>
+          }
+        </div>
       </div>
       <History urls={data || []} isLoading={isLoading} />
       {!isLoading && <More />}
