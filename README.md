@@ -1,24 +1,28 @@
 # Minify
 
-A url shortner with url configuration , tracking and analytics
+A url shortner with url configuration , tracking and analytics - [LIVE 🔴](http://v-7.herokuapp.com/)
 
-## Backend
+## Features 
+1. Short long urls.
+1. Add limit and expiring date to the url
+1. View demographics of clickers and limit usage in graphical form
+1. Beautiful and Responsive Landing page and modern interface
 
-### Routes
+## Tech Stack
 
-1. POST **/api/generate**
-   - Generates url
-   - Takes expiration time , long url
-   - returns short url link
+- 🌐 **Client** : React , Tailwind CSS , Typescript , React query
+- 💽 **Server** : Express , Passport ,  Mongoose
+- 🔢 **DataBase** : MongoDB
+- ✈️ **Deployed On** : Heroku
 
-### Data Models
+## Technical notes
+- Monolith architecture , client build with vite and a server with express
+- Why **MongoDB** ? Faster than sql database for Key - Value pair searching and the datamodels were not too complex 
+- **Generation of unique ids** for urls : Using first 6 digits of hash of Nth url generated. That way we can also assign ranges to multiple server for generation.
+- Google JWT authentication [no body has time for creating account with mail and password :(] 
+- Access token stored in session storage of browser and refresh token stored in cookies
 
-Made using prisma + mongoDB
-
-1. USER
-
-- NAME , ACCOUNT CREATED , URLS , AUTH
-
-2. URL
-
-- URL , SHORT ID , EXPIRATION TIME , TOTAL_CLICKS , CLICKS_BY_COUNTRY , CLICKS_BY_TIME
+## Future Notes
+- Checking if short id collide (Skipped because very unlikely to happen)
+- Change advance button from checkbox to slider
+- Add slide animation when advance button in toogled
