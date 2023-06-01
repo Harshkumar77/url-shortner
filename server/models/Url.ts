@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose"
-import { readFileSync } from "node:fs"
+import { readFileSync } from "fs"
 import User from "./User"
 import Stats from "./Stats"
 import { createHash } from "crypto"
