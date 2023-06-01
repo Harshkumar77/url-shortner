@@ -13,6 +13,7 @@ export const configureApp = (app: Express) => {
   app.use(morgan("dev"))
   app.use(express.static("dist"))
   app.set("trust proxy", true)
+  app.use("/assets" , express.static("dist/assets") )
 
   const {
     DATABASE_URL,
