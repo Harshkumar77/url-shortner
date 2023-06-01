@@ -2,7 +2,7 @@ import express from "express"
 import passport from "passport"
 import jwt, { JwtPayload } from "jsonwebtoken"
 import { verifyUser } from "../middleware/auth"
-import { URL } from "node:url"
+import { URL } from "url"
 import Url, { extendedCountries, PopulateUrlIds } from "../models/Url"
 import User from "../models/User"
 
