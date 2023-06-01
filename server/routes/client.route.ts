@@ -6,7 +6,7 @@ function sendClientCode(req: Request, res: Response) {
 }
 
 function sendAdditionalCode(req: Request, res: Response) {
-  res.sendFile(`dist/${req.params.file}`)
+  res.sendFile(`dist/assets/${req.params.file}`)
 }
 
 clientRouter.get("/", sendClientCode)
