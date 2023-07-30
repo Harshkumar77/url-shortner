@@ -22,7 +22,7 @@ A url shortner with url configuration , tracking and analytics
 - Google JWT authentication [no body has time for creating account with mail and password :(] 
 - Access token stored in session storage of browser and refresh token stored in cookies
 
-
+# Preview
 https://github.com/Harshkumar77/url-shortner/assets/72347597/48ffc71e-8521-407a-a1e4-e45b4ebf1168
 
 
