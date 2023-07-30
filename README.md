@@ -1,6 +1,6 @@
 # Minify
 
-A url shortner with url configuration , tracking and analytics - [LIVE 🔴](http://v-7.herokuapp.com/)
+A url shortner with url configuration , tracking and analytics 
 
 ## Features 
 1. Short long urls.
@@ -21,6 +21,10 @@ A url shortner with url configuration , tracking and analytics - [LIVE 🔴](htt
 - **Generation of unique ids** for urls : Using first 6 digits of hash of Nth url generated. That way we can also assign ranges to multiple server for generation.
 - Google JWT authentication [no body has time for creating account with mail and password :(] 
 - Access token stored in session storage of browser and refresh token stored in cookies
+
+
+https://github.com/Harshkumar77/url-shortner/assets/72347597/48ffc71e-8521-407a-a1e4-e45b4ebf1168
+
 
 ## Future Notes
 - Checking if short id collide (Skipped because very unlikely to happen)
