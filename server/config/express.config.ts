@@ -11,10 +11,7 @@ export const configureApp = (app: Express) => {
   app.use(cookieParser())
   app.use(passport.initialize())
   app.use(morgan("dev"))
-  app.use(express.static("dist"))
   app.set("trust proxy", true)
-  express.static("/dist")
-  app.use("/assets", express.static("dist/assets"))
 
   const {
 

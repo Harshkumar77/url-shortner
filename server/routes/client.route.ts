@@ -1,10 +1,6 @@
 import express, { Request, Response } from "express"
 export const clientRouter = express.Router()
 
-function sendClientCode(req: Request, res: Response) {
-  res.sendFile("dist/index.html")
-}
+clientRouter.use("/" , express.static("dist"))
+clientRouter.use("/url/:id" , express.static("dist"))
 
-
-clientRouter.get("/", sendClientCode)
-clientRouter.get("/url/:id", sendClientCode)
