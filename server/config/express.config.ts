@@ -13,31 +13,35 @@ export const configureApp = (app: Express) => {
   app.use(morgan("dev"))
   app.use(express.static("dist"))
   app.set("trust proxy", true)
-  app.use("/assets" , express.static("dist/assets") )
+  express.static("/dist")
+  app.use("/assets", express.static("dist/assets"))
 
   const {
+
+    BASE_URL,
     DATABASE_URL,
-    PORT,
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
+    IP_INFO_KEY,
     JWT_KEY,
     NODE_ENV,
-    IP_INFO_KEY,
+    PORT,
   } = process.env
 
   if (
+    !BASE_URL ||
     !DATABASE_URL ||
-    !PORT ||
     !GOOGLE_CLIENT_ID ||
     !GOOGLE_CLIENT_SECRET ||
+    !IP_INFO_KEY ||
     !JWT_KEY ||
     !NODE_ENV ||
-    !IP_INFO_KEY
+    !PORT
   )
     throw Error("Check enviornment variables")
 
   app.listen(PORT, () =>
-    console.log(`Server started at http://localhost:${PORT}`)
+    console.log(`Server started at ${BASE_URL} at port => ${PORT}`)
   )
 
   mongoose.connect(DATABASE_URL, (err) => {
