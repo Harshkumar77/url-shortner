@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index.ts",
     "serve": "node build/index.js",
-    "build": "npx tsc -p ."
+    "build" : "pnpm --package=typescript dlx tsc -p . ; pnpm --prefix ../client build",
+    "build-old": "npx tsc -p ."
   },
   "keywords": [],
   "author": "",
