@@ -29,7 +29,7 @@ redirectRouter.get("/:short", async (req, res) => {
     res.redirect(url.url)
     url.clicks++
 
-    if (process.env.NODE_ENV === "prod")
+    if (process.env.NODE_ENV !== "dev")
       await axios
         .get(
           `https://ipinfo.io/${req.ip === "::1" ? "" : req.ip}?token=${
