@@ -50,7 +50,7 @@ redirectRouter.get("/:short", async (req, res) => {
         url.countries.set(country, url.countries.get(country)! + 1)
       else url.countries.set(country, 1)
     }
-    url.save()
+    await url.save()
   } catch (error: any) {
     console.log(error.message)
     res.status(500)

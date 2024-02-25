@@ -2,7 +2,7 @@ import mongoose, { model } from "mongoose"
 import { readFileSync } from "fs"
 import User from "./User"
 import Stats from "./Stats"
-import { createHash } from "crypto"
+import { createHash , randomUUID} from "crypto"
 
 const countries = JSON.parse(
   readFileSync("data/countries.json").toString()
@@ -49,42 +49,24 @@ export const urlSchema = new mongoose.Schema({
   },
 })
 
-urlSchema.pre("save", async function (next) {
+urlSchema.pre("save", async function(next) {
   if (!this.isNew) return next()
-  const stats = await Stats.findOne({})
-  if (stats == null || stats.urlDigestIndex == null || stats.urlShorted == null)
-    throw new Error("Something wrong with Stats")
-  let foundUnique = true
-  // let short = ""
-  // while (foundUnique) {
-  //     short = createHash('md5').update("" + stats.urlDigestIndex++).digest('base64url').slice(0, 6)
-  //     stats.urlDigestIndex++
-  //     if (await mongoose.models['Url'].where('short').equals(short) != null) {
-  //         console.log(short);
-  //         continue
-  //     }
-  //     foundUnique = false
-  // }
-  // todo:code for collison
-  this.short = createHash("md5")
-    .update("" + stats.urlDigestIndex++)
-    .digest("base64url")
-    .slice(0, 6)
-  if (stats == null || stats.urlShorted == null)
-    throw new Error("Something wrong with Stats")
-  stats.urlShorted++
-  const user = await User.findById(this.generatedBy)
-  if (user == null)
-    throw Error(`Check user ${this.generatedBy} or something went wrong`)
-  user.urls.push(this.id)
-  user.save()
-  next()
-  stats.save()
-})
+  let shortExists = false;
+  do {
+    this.short = createHash("md5")
+      .update(randomUUID())
+      .digest("base64url")
+      .slice(0, 6)
+    shortExists = await Url.findOne({ short: this.short }) !== null
+  } while (shortExists);
 
-// urlSchema.post("save", async function (doc, next) {
-//   if (!this.isNew) return next()
-// })
+  const user = await User.findById(this.generatedBy)
+  if (!user)
+    throw Error("How")
+  user.urls.push(this.id)
+  await user.save()
+  next()
+})
 
 export function extendedCountries(doc: any) {
   const c = doc.countries
