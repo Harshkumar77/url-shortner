@@ -7,7 +7,9 @@
     "dev": "nodemon index.ts",
     "serve": "node build/index.js",
     "build" : "pnpm --package=typescript dlx tsc -p . ; pnpm --prefix ../client build",
-    "build-old": "npx tsc -p ."
+    "build-old": "npx tsc -p .",
+    "dev-both" : "pnpm --prefix ../client dev & pnpm dev"
+
   },
   "keywords": [],
   "author": "",
