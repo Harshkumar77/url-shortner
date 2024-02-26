@@ -14,7 +14,6 @@ export const configureApp = (app: Express) => {
   app.set("trust proxy", true)
 
   const {
-
     BASE_URL,
     DATABASE_URL,
     GOOGLE_CLIENT_ID,
@@ -23,6 +22,7 @@ export const configureApp = (app: Express) => {
     JWT_KEY,
     NODE_ENV,
     PORT,
+    DEV_CLIENT_URL
   } = process.env
 
   if (
@@ -33,7 +33,8 @@ export const configureApp = (app: Express) => {
     !IP_INFO_KEY ||
     !JWT_KEY ||
     !NODE_ENV ||
-    !PORT
+    !PORT ||
+    !DEV_CLIENT_URL
   )
     throw Error("Check enviornment variables")
 
