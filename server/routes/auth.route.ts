@@ -44,7 +44,7 @@ authRouter.get(
       httpOnly: true,
     })
     if ((process.env.NODE_ENV as string) === "dev")
-      res.redirect(`${process.env.DEV_CLIENT_URL}`)
+      res.redirect(`${process.env.DEV_CLIENT_URL as string}`)
     else res.redirect("/")
   }
 )
