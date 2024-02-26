@@ -95,7 +95,7 @@ function AbouMe() {
         . By signing up you are agreeing up to {" "} 
         <a
           className="font-bold text-primary underline"
-          href="https://gist.github.com/Harshkumar77/af4dec9cc2e13ef35442aafe202acac4"
+          href="/tnc"
         >terms and condition</a>
       </p>
     </div>

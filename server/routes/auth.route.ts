@@ -70,3 +70,9 @@ authRouter.post("/auth/access_token", (req, res) => {
     } else res.status(400).send(error)
   }
 })
+
+authRouter.use("/tnc", (_, res) => {
+  return res.send(
+    `<script src="https://gist.github.com/Harshkumar77/af4dec9cc2e13ef35442aafe202acac4.js"></script>`
+  )
+})
