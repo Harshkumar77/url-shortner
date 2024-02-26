@@ -38,13 +38,15 @@ export const configureApp = (app: Express) => {
   )
     throw Error("Check enviornment variables")
 
-  app.listen(PORT, () =>
-    console.log(`Server started at ${BASE_URL} at port => ${PORT}`)
-  )
-
+  mongoose.set('strictQuery', false);
   mongoose.connect(DATABASE_URL, (err) => {
-    if (err) console.error(err.message)
-    else console.log("Connected to database")
+    if (err) return console.error(err.message)
+
+    console.log("Connected to database")
+    app.listen(PORT, () =>
+      console.log(`Server started at ${BASE_URL} at port => ${PORT}`)
+    )
   })
+
   configurePassport()
 }
