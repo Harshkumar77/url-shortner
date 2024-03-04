@@ -36,24 +36,24 @@ export default function Landing() {
     <>
       <div className="flex flex-col min-h-full justify-start">
         <header>
-          <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+          <nav className="border-gray-200 px-4 lg:px-6 py-2.5 bg-gray-800">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
               <a href="/" className="flex items-center">
-                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
                   👆 Minify
                 </span>
               </a>
               <div className="flex items-center lg:order-2">
                 <a
                   href={authUrl}
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  className="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800"
                 >
                   Sign Up for free trial
                 </a>
                 <button
                   data-collapse-toggle="mobile-menu-2"
                   type="button"
-                  className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  className="inline-flex items-center p-2 ml-1 text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
                   aria-controls="mobile-menu-2"
                   aria-expanded="false"
                 >
@@ -95,15 +95,15 @@ export default function Landing() {
         <section className="bg-transparent">
           <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div className="mr-auto place-self-center lg:col-span-7">
-              <h1 className="max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">
+              <h1 className="max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl text-white">
                 Modern URL shortner for Enterprise
               </h1>
-              <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+              <p className="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-gray-400">
                 Comes with Tracking and Advance analytics
               </p>
               <a
                 href={authUrl}
-                className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+                className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-900"
               >
                 Continue with Google
                 <svg
@@ -121,7 +121,7 @@ export default function Landing() {
               </a>
               <a
                 href="mailto:volcanowritingcode@gmail.com"
-                className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center border rounded-lg focus:ring-4 text-white border-gray-700 hover:bg-gray-700 focus:ring-gray-800"
               >
                 Speak to Sales
               </a>
@@ -140,8 +140,8 @@ export default function Landing() {
 
         <section className="md:m-4">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div className="max-w-screen-lg text-white sm:text-lg dark:text-gray-400">
-              <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
+            <div className="max-w-screen-lg sm:text-lg text-gray-400">
+              <h2 className="mb-4 text-4xl font-bold text-white">
                 Why you should choose us ?
               </h2>
               <ul className="font-semibold">
@@ -155,15 +155,15 @@ export default function Landing() {
           </div>
         </section>
 
-        <footer className="p-4 bg-gray-50 sm:p-6 dark:bg-gray-800">
+        <footer className="p-4 sm:p-6 bg-gray-800">
           <div className="mx-auto max-w-screen-xl">
             <div className="md:flex md:justify-between">
               <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                 <div>
-                  <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="mb-6 text-sm font-semibold uppercase text-white">
                     Follow us
                   </h2>
-                  <ul className="text-gray-600 dark:text-gray-400">
+                  <ul className="text-gray-400">
                     <li className="mb-4">
                       <a href="https://github.com/Harshkumar77/" className="hover:underline ">
                         Github
@@ -177,10 +177,10 @@ export default function Landing() {
                   </ul>
                 </div>
                 <div>
-                  <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                  <h2 className="mb-6 text-sm font-semibold uppercase text-white">
                     Legal
                   </h2>
-                  <ul className="text-gray-600 dark:text-gray-400">
+                  <ul className="text-gray-400">
                     <li className="mb-4">
                       <a href="/tnc" className="hover:underline">
                         Privacy Policy
@@ -195,9 +195,9 @@ export default function Landing() {
                 </div>
               </div>
             </div>
-            <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <hr className="my-6 sm:mx-auto border-gray-700 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
-              <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+              <span className="text-sm sm:text-center text-gray-400">
                 © {`${new Date().getFullYear()} `}
                 <a href="/" className="hover:underline">Minify</a>
                 . All Rights Reserved.
